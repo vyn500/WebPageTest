@@ -46,13 +46,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ============================================
-    // MOBILE MENU TOGGLE
+    // MOBILE MENU TOGGLE - FIXED
     // ============================================
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.getElementById('nav-links');
 
     if (menuToggle && navLinks) {
-        menuToggle.addEventListener('click', function() {
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             this.classList.toggle('active');
             navLinks.classList.toggle('active');
         });
