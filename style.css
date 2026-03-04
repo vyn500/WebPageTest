@@ -127,23 +127,26 @@ body {
         padding: 1rem 5%;
     }
 
-    /* MOBILE NAV LINKS - FIXED */
+    /* MOBILE NAV LINKS - WITH BLUR & TRANSPARENCY */
     .nav-links {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(5, 5, 5, 0.98);
+        background: rgba(5, 5, 5, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 2rem;
         padding: 2rem 0;
         transform: translateX(100%);
-        transition: transform 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 999;
-        display: none; /* Hidden by default */
+        display: none;
+        box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
     }
 
     .nav-links.active {
@@ -151,22 +154,62 @@ body {
         transform: translateX(0);
     }
 
+    /* Border Frame Effect */
+    .nav-links::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        border-radius: 0;
+        pointer-events: none;
+    }
+
     .nav-links a {
         font-size: 1.1rem;
         padding: 0.8rem 1.5rem;
-        border-radius: 5px;
+        border-radius: 8px;
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .nav-links a::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background: rgba(168, 85, 247, 0.1);
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::before {
+        width: 100%;
     }
 
     .nav-links a:hover {
-        background: rgba(168, 85, 247, 0.1);
+        background: rgba(168, 85, 247, 0.15);
         color: var(--accent-purple);
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
     }
 
     .btn-nav {
         padding: 0.7rem 1.5rem;
         font-size: 1rem;
         border: 2px solid var(--accent-purple);
+        background: transparent;
+        transition: all 0.3s ease;
+    }
+
+    .btn-nav:hover {
+        background: var(--accent-purple);
+        color: white;
+        box-shadow: 0 0 25px var(--accent-glow);
     }
 
     .menu-toggle {
@@ -1857,4 +1900,5 @@ input:focus {
     }
 
 }
+
 
